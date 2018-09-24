@@ -1,0 +1,45 @@
+Add to Chart operation failed, reason: line 8: Variable `src` was declared with series type. Cannot assign it expression of type plot
+Add to Chart operation failed, reason: line 10: Variable `src` was declared with series type. Cannot assign it expression of type plot
+Add to Chart operation failed, reason: line 10: Variable `src` was declared with series type. Cannot assign it expression of type plot
+Add to Chart operation failed, reason: line 10: mismatched input 'end of line without line continuation' expecting ':'
+Add to Chart operation failed, reason: line 10: mismatched input 'end of line without line continuation' expecting ')'
+Add to Chart operation failed, reason: line 10: syntax error at input ')'
+Add to Chart operation failed, reason: line 10: syntax error at input ')'
+Add to Chart operation failed, reason: line 10: Variable `src` was declared with float type. Cannot assign it expression of type plot
+Add to Chart operation failed, reason: The script must have at least one output function call (e.g. plot, barcolor, etc.). Reason: AST is Empty
+Script study added to the chart
+Add to Chart operation failed, reason: line 8: Variable `src` is already declared.
+Add to Chart operation failed, reason: line 5: no viable alternative at character '`'
+Add to Chart operation failed, reason: line 9: syntax error at input 'end of line without line continuation'
+Add to Chart operation failed, reason: line 9: syntax error at input 'end of line without line continuation'
+Add to Chart operation failed, reason: line 10: syntax error at input 'end of line without line continuation'
+Add to Chart operation failed, reason: line 10: mismatched input '_log' expecting 'end of line without line continuation'
+Add to Chart operation failed, reason: line 10: syntax error at input 'end of line without line continuation'
+Add to Chart operation failed, reason: line 8: Undeclared identifier `_src`
+Add to Chart operation failed, reason: The script must have at least one output function call (e.g. plot, barcolor, etc.). Reason: AST is Empty
+Add to Chart operation failed, reason: line 13: syntax error at input ')'
+Add to Chart operation failed, reason: line 13: mismatched input 'end of line without line continuation' expecting ')'
+Script study added to the chart
+Add to Chart operation failed, reason: line 19: Undeclared identifier `both`
+Script study added to the chart
+Add to Chart operation failed, reason: line 15: Undeclared identifier `src`;
+line 15: Undeclared identifier `len`;
+line 17: Undeclared identifier `two`
+Script study added to the chart
+Add to Chart operation failed, reason: line 11: Undeclared identifier `log`
+Add to Chart operation failed, reason: Cannot read property 'toString' of null
+Add to Chart operation failed, reason: line 11: Cannot call `operator ?:` with arguments (fun_ref__anonym_function_0, const color, const color); available overloads: ?:(bool, bool, bool) => bool; ?:(bool, integer, integer) => integer; ?:(bool, float, float) => float; ?:(bool, color, color) => color; ?:(bool, series, series) => series; ?:(bool, series[integer], series[integer]) => series[integer]; ?:(bool, series[color], series[color]) => series[color]; ?:(bool, string, string) => string; ?:(const bool, const bool, const bool) => const bool; ?:(const bool, const integer, const integer) => const integer; ?:(const bool, const float, const float) => const float; ?:(const bool, const string, const string) => const string; ?:(const bool, const color, const color) => const color; ?:(series[bool], bool, bool) => series[bool]; ?:(series[bool], integer, integer) => series[integer]; ?:(series[bool], float, float) => series; ?:(series[bool], color, color) => series[color]; ?:(series[bool], series[integer], series[integer]) => series[integer]; ?:(series[bool], series[color], series[color]) => series[color]; ?:(series[bool], series[bool], series[bool]) => series[bool]; ?:(series[bool], series, series) => series
+Add to Chart operation failed, reason: line 11: Cannot call `operator ==` with arguments (fun_ref__anonym_function_0, literal string); available overloads: ==(string, string) => bool; ==(float, float) => bool; ==(bool, bool) => bool; ==(const string, const string) => const bool; ==(const float, const float) => const bool; ==(const bool, const bool) => const bool; ==(series[color], series[color]) => series[bool]; ==(series[bool], series[bool]) => series[bool]; ==(series[integer], series[integer]) => series[bool]; ==(series, series) => series[bool]
+Add to Chart operation failed, reason: Cannot read property 'toString' of null
+Add to Chart operation failed, reason: line 11: Cannot call `operator ==` with arguments (literal string, literal bool); available overloads: ==(string, string) => bool; ==(float, float) => bool; ==(bool, bool) => bool; ==(const string, const string) => const bool; ==(const float, const float) => const bool; ==(const bool, const bool) => const bool; ==(series[color], series[color]) => series[bool]; ==(series[bool], series[bool]) => series[bool]; ==(series[integer], series[integer]) => series[bool]; ==(series, series) => series[bool]
+Add to Chart operation failed, reason: line 11: Cannot call `operator ==` with arguments (literal string, literal bool); available overloads: ==(string, string) => bool; ==(float, float) => bool; ==(bool, bool) => bool; ==(const string, const string) => const bool; ==(const float, const float) => const bool; ==(const bool, const bool) => const bool; ==(series[color], series[color]) => series[bool]; ==(series[bool], series[bool]) => series[bool]; ==(series[integer], series[integer]) => series[bool]; ==(series, series) => series[bool]
+Add to Chart operation failed, reason: Cannot read property 'toString' of null
+Add to Chart operation failed, reason: Output rm_0 depends on mutable variable. Enclose code with mutable vars in a function call
+Add to Chart operation failed, reason: Cannot read property 'toString' of null
+Add to Chart operation failed, reason: line 11: Cannot read property 'isNormalType' of undefined
+Add to Chart operation failed, reason: line 11: syntax error at input 'tostring'
+Add to Chart operation failed, reason: line 11: Cannot call `tostring` with arguments (literal string); available overloads: tostring(series) => string; tostring(series, string) => string;
+line 11: Cannot call `operator SQBR` with arguments (literal string, literal integer); available overloads: SQBR(series[na], integer) => series[na]; SQBR(series[integer], integer) => series[integer]; SQBR(series[color], integer) => series[color]; SQBR(series[bool], integer) => series[bool]; SQBR(series, integer) => series; SQBR(series[na], series) => series[na]; SQBR(series[integer], series) => series[integer]; SQBR(series[color], series) => series[color]; SQBR(series[bool], series) => series[bool]; SQBR(series, series) => series
+Add to Chart operation failed, reason: line 11: Cannot call `tostring` with arguments (literal string); available overloads: tostring(series) => string; tostring(series, string) => string;
+line 11: Cannot call `operator SQBR` with arguments (literal string, literal integer); available overloads: SQBR(series[na], integer) => series[na]; SQBR(series[integer], integer) => series[integer]; SQBR(series[color], integer) => series[color]; SQBR(series[bool], integer) => series[bool]; SQBR(series, integer) => series; SQBR(series[na], series) => series[na]; SQBR(series[integer], series) => series[integer]; SQBR(series[color], series) => series[color]; SQBR(series[bool], series) => series[bool]; SQBR(series, series) => series
+Add to Chart operation failed, reason: line 11: Undeclared identifier `SQBR`
