@@ -1,3 +1,15 @@
+When I attempted to make a source mutable: 
+src  = 0.0
+
+src := plot( log ? exp(ema(log(src), input(10, "Length")), "", red) : src[1] + ema(src[1], input(10, "Length")))
+
+Add to Chart operation failed, reason: line 10: Variable `src` was declared with series type. Cannot assign it expression of type plot
+
+
+
+
+
+
 Add to Chart operation failed, reason: line 8: Variable `src` was declared with series type. Cannot assign it expression of type plot
 Add to Chart operation failed, reason: line 10: Variable `src` was declared with series type. Cannot assign it expression of type plot
 Add to Chart operation failed, reason: line 10: Variable `src` was declared with series type. Cannot assign it expression of type plot
