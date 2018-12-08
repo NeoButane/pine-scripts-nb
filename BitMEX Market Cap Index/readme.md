@@ -4,7 +4,7 @@
 
 **Description**: An index of the derivatives on BitMEX weighted by market cap.
 
-
+![MCap Stochastic](https://www.tradingview.com/x/Qn5f84uc/)
 
 Methodology:
 - Available supply * close price
