@@ -1,0 +1,67 @@
+//@version=3
+// @NeoButane 6 Nov. 2018
+
+// An index of the derivatives on BitMEX weighted by market cap.
+// Bitcoin mcap adjusted to match ETH's to reduce its dominance in weighting
+
+// Sourcing: CMC
+// Date used for weighting: 15 June 2018. Tried newer dates and it barely varies
+// Binance/TV USD estimate used for the most comprehensive single source
+
+// Release - Candles/EMA + Stochastic 
+//    .Made into an indicator so I would be able to view intraday + have stoch accessible on a BTC chart
+//
+// Update  - 8 Dec. 18 - Replaced Binance BCH with Bittrex BCH. Would sure be nice if they kept the old candles...or backfilled ABC...
+//    .The 'real' value of BCH is ABC + SV but BitMEX will follow only ABC until expiry. 
+//   ..Citation: https://blog.bitmex.com/site_announcement/bitcoin-cash-hardfork-policy-and-impact-on-bchz18/
+
+study("BitMEX Market Cap Index [2018/June]")
+
+CS = 'Candlesticks'
+ST = 'Stochastic'
+type      = input(CS, "Display", options=[CS, ST])
+cs = type == CS
+st = type == ST
+
+fakemoney = input(false, "Adjust For Tether")
+//No real need to use this
+
+stLen     = 10//input(10, "Stoch Length", minval=1)
+stK       = 6//input(6,  "Stoch: K", minval=1)
+stD       = 3//input(3,  "Stoch: D", minval=1)
+
+ada = 'BINANCE:ADAUSD^0.0266'
+bch = 'BITTREX:BCHUSDT^0.0936'
+btc = 'BINANCE:BTCUSDT^0.3152'
+eos = 'BINANCE:EOSUSD^0.0613'
+eth = 'BINANCE:ETHUSD^0.3152'
+ltc = 'BINANCE:LTCUSD^0.0353'
+trx = 'BINANCE:TRXUSD^0.0169'
+xrp = 'BINANCE:XRPUSD^0.1359'
+
+
+index = ada + "*" + bch + "*" + btc + "*" + eos + "*" + eth + "*" + ltc + "*" + trx + "*" + xrp
+
+bfxd = 'KRAKEN:USDTUSD'
+
+t(x, y) => 
+  fakemoney ? security(x, period, y) * security(bfxd, period, y) * 0.42461024 : 
+  security(x, period, y) * 0.424652793
+
+o = t(index,  open)
+h = t(index,  high)
+l = t(index,   low)
+c = t(index, close)
+
+upCol = #48978E
+dnCol = #CD615B
+plotcandle(cs ? o : na, cs ? h : na, cs ? l : na, cs ? c : na, CS, c > o ? upCol : dnCol, gray)
+maLen = plot(cs ? ema(c, input(14, "EMA Length", minval=1)) : na, "EMA", red, 2)
+
+stoch = sma(stoch(c, h, l, stLen), stK)
+stoch2 = sma(stoch, stD)
+plot(st ? stoch : na, "Stoch K", blue, 1, 7)
+plot(st ? stoch2 : na, "Stoch D", orange, 1, 7)
+stu = plot(st ? 75 : na, "", gray, 1, 7, 0, 100)
+stl = plot(st ? 25 : na, "", gray, 1, 7, 0, 100)
+fill(stu, stl, aqua, 90)
