@@ -5,9 +5,13 @@ Description: An index of the derivatives on BitMEX weighted by market cap.
 
 Methodology:
 Available supply * close price
+
 Bitcoin mcap adjusted to match ETH's to reduce its dominance in weighting.
+
 Source for supply and price: Coinmarketcap
+
 Source for candles: Binance + Bittrex
+
 Date used for weighting: 15 June 2018. An older date was used to have more valid historical data. Newer dates don't vary much.
 
 
