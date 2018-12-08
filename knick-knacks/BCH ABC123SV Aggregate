@@ -1,0 +1,16 @@
+//@version=3
+// @NeoButane
+study("BCHABC123SV Aggregate Index", overlay=true)
+
+usdt = input(false, "USDT | BTC")
+
+one = usdt ? 'BITTREX:BCHUSDT' : 'BITTREX:BCHBTC'
+two = usdt ? 'BINANCE:BCHABCUSDT+BINANCE:BCHSVUSDT' : 'BINANCE:BCHABCBTC+BINANCE:BCHSVBTC'
+
+C(x) => n > 0 ? (time <= 1542354900000 ? security(one, period, x) : security(two, period, x[0], lookahead=barmerge.lookahead_on)) : na
+
+o = C(open)
+h = C(high)
+l = C(low)
+c = C(close)
+plotcandle(o, h, l, c, "", c > o ? #48978E : #CD615B, gray)
