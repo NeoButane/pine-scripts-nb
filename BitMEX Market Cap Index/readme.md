@@ -22,3 +22,4 @@ Methodology:
 - The 'real' value of BCH is ABC + SV but BitMEX will follow only ABC until expiry. 
   - Citation: https://blog.bitmex.com/site_announcement/bitcoin-cash-hardfork-policy-and-impact-on-bchz18/
 
+https://www.tradingview.com/chart/ADAUSD/awXkt1i6-Oh-dear/
