@@ -1,0 +1,137 @@
+//@version=3
+study("Hourly Fibonacci Pivot Points", overlay=true)
+fib = input(true, title="Use Fibonacci Pivot Points")
+hourinput = input('6 Hour', title="Hour selection", options=['1 Hour', '2 Hour', '3 Hour', '4 Hour', '6 Hour', '12 Hour'])
+////barcol = input(false, title="Color candlesticks based on location")
+//styleinput = input(true, title="Style")
+//styleinput = input('Line Break', title="Style Selection", options=['Line Break', 'Circles'])
+showP = input(true, title="Show Pivot")
+showS = true//input(true, title="Show Support Levels")
+showR = true//input(true, title="Show Resistance Levels")
+barinput = input(true, title="Separate lines based on period")
+showL = input(true, title="Show Labels")
+//showlabel = input(true, title="Show Self-Made Labels")
+
+//Lookback Period
+iMonth = 6//, title="From Month:", minval = 1, maxval = 12)
+missDay   = 15//, title="From Day:", minval = 1, maxval = 31)
+youYear  = 2014//, title="From Year:", minval = 2013)
+day = input(01, title="Day to draw from:", minval = 1, maxval = 31)
+thismonth = input(5, title="Month to draw from:", minval = 1, maxval = 12)
+thisyear = input(2018, title="Year to draw from:", minval = 2013)
+
+Hour = input(00, title="From Hour:", minval = 00, maxval = 23)
+Minute = input(00, title="From Minute:", minval= 00, maxval = 59, step=15)
+halp = input('ok', title="Save as default to save date settings", options=['ok', 'no', 'the options do nothing'])
+
+//when = (goLong() and (time > timestamp(FromYear, FromMonth, FromDay, 00, 00)) and (time < timestamp(ToYear, ToMonth, ToDay, 23, 59))))
+
+//lb = 7
+//c = 6
+
+//calcStyle() =>
+//    style = 0
+//    if styleinput == 'Line Break'
+//        style := lb
+//    if styleinput == 'Circles'
+//        style := c
+//    style
+
+//function to discover price
+calcH() =>
+    res = na
+    if hourinput == '1 Hour'
+        res := 60
+    if hourinput == '2 Hour'
+        res := 120
+    if hourinput == '3 Hour'
+        res := 180
+    if hourinput == '4 Hour'
+        res := 240
+    if hourinput == '6 Hour'
+        res := 360
+    if hourinput == '12 Hour'
+        res := 720
+    res
+
+pivotcol = #FAD089//', title="Pivot Color")
+r1col = #FF9C5B//', title="R1 Color")
+s1col = #FF9C5B//', title="S1 Color")
+r2col = #F5634A//', title="R2 Color")
+s2col = #F5634A//', title="S2 Color")
+r3col = #ED303C//', title="R3 Color")
+s3col = #ED303C//', title="S3 Color")
+
+//hlc tickers
+pivothigh = security(tickerid, tostring(calcH(), '#'), high[1], lookahead=barmerge.lookahead_on)//, barmerge.gaps_off)//, barmerge.gaps_on)
+pivotlow = security(tickerid, tostring(calcH(), '#'), low[1], lookahead=barmerge.lookahead_on)//, barmerge.gaps_off)//, barmerge.gaps_on)
+pivotclose = security(tickerid, tostring(calcH(), '#'), close[1], lookahead=barmerge.lookahead_on)//, barmerge.gaps_off)//, barmerge.gaps_on)
+
+//pivot calculation
+pivot = (pivothigh + pivotlow + pivotclose) / 3
+r1 = fib ? pivot + (pivothigh - pivotlow)*.382 : pivot*2 - pivotlow
+r2 = fib ? pivot + (pivothigh - pivotlow)*.618 : pivot + (pivothigh - pivotlow)
+r3 = fib ? pivot + (pivothigh - pivotlow)*1 : pivothigh + 2*(pivot - pivotlow)
+//r4 = fib ? pivot + (pivothigh - pivotlow)*2.618 : na
+s1 = fib ? pivot - (pivothigh - pivotlow)*.382 : pivot*2 - pivothigh
+s2 = fib ? pivot - (pivothigh - pivotlow)*.618 : pivot - (pivothigh - pivotlow)
+s3 = fib ? pivot - (pivothigh - pivotlow)*1 : pivotlow - 2*(pivothigh - pivot)
+//s4 = fib ? pivot - (pivothigh - pivotlow)*2.618 : na
+
+//Line breaks/count based on hour chosen
+count1h = period == '1' ? n%60 : period == '3' ? n%20 : period == '5' ? n%12 : period == '15' ? n%4 : na
+count2h = period == '1' ? n%120 : period == '3' ? n%40 : period == '5' ? n%24 : period == '15' ? n%8 : period == '30' ? n%4 : na
+count3h = period == '1' ? n%180 : period == '3' ? n%60 : period == '5' ? n%36 : period == '15' ? n%12 : period == '30' ? n%6 : period == '60' ? n%3 : na
+count4h = period == '1' ? n%240 : period == '3' ? n%80 : period == '5' ? n%48 : period == '15' ? n%16 : period == '30' ? n%8 : period == '60' ? n%4 : period == '120' ? n%2 : na
+count6h = period == '1' ? n%360 : period == '3' ? n%120 : period == '5' ? n%72 : period == '15' ? n%24 : period == '30' ? n%12 : period == '60' ? n%6 : na
+count12h = period == '1' ? n%720 : period == '3' ? n%240 : period == '5' ? n%144 : period == '15' ? n%48 : period == '30' ? n%24 : period == '60' ? n%12 : period == '120' ? n%6 : na
+barnone = true
+bar1h = period == '1' and count1h == 59 ? false : period == '3' and count1h == 19 ? false : period == '5' and count1h == 11 ? false : period == '15' and count1h == 3 ? false : true
+bar2h = period == '1' and count2h == 119 ? false : period == '3' and count2h == 39 ? false : period == '5' and count2h == 23 ? false : period == '15' and count2h == 7 ? false : period == '30' and count2h == 3 ? false : true
+bar3h = period == '1' and count3h == 179 ? false :  period == '3' and count3h == 59 ? false : period == '5' and count3h == 35 ? false : period == '15' and count3h == 11 ? false : period == '30' and count3h == 5 ? false : period == '60' and count3h == 2 ? false : true
+bar4h = period == '1' and count4h == 239 ? false :  period == '3' and count4h == 79 ? false : period == '5' and count4h == 47 ? false : period == '15' and count4h == 15 ? false : period == '30' and count4h == 7 ? false : period == '60' and count4h == 4 ? false : period == '120' and count4h == 1 ? false : true
+bar6h = period == '1' and count6h == 359 ? false :  period == '3' and count6h == 119 ? false : period == '5' and count6h == 71 ? false : period == '15' and count6h == 23 ? false : period == '30' and count6h == 11 ? false : period == '60' and count6h == 5 ? false : true
+bar12h = period == '1' and count12h == 719 ? false :  period == '3' and count12h == 239 ? false : period == '5' and count12h == 143 ? false : period == '15' and count12h == 47 ? false : period == '30' and count12h == 23 ? false : period == '60' and count12h == 11 ? false : period == '120' and count12h == 5 ? false : true
+bar = calcH() == 60 and barinput ? bar1h : calcH() == 120 and barinput ? bar2h : calcH() == 180 and barinput ? bar3h : calcH() == 240 and barinput ? bar3h : calcH() == 360 and barinput ? bar6h : calcH() == 720 and barinput ? bar12h : barnone
+
+pp = plot(bar and showP  and (time > timestamp(thisyear, thismonth, day, Hour, Minute))? pivot:na, title="Pivot", style=7, color=pivotcol, linewidth=2)
+pr1 = plot(bar and showR and (time > timestamp(thisyear, thismonth, day, Hour, Minute)) ? r1:na, title="R1", style=7, color=r1col)
+ps1 = plot(bar and showS and (time > timestamp(thisyear, thismonth, day, Hour, Minute)) ? s1:na, title="S1", style=7, color=s1col)
+pr2 = plot(bar and showR and (time > timestamp(thisyear, thismonth, day, Hour, Minute)) ? r2:na, title="R2", style=7, color=r2col)
+ps2 = plot(bar and showS and (time > timestamp(thisyear, thismonth, day, Hour, Minute)) ? s2:na, title="S2", style=7, color=s2col)
+pr3 = plot(bar and showR and (time > timestamp(thisyear, thismonth, day, Hour, Minute)) ? r3:na, title="R3", style=7, color=r3col)
+ps3 = plot(bar and showS and (time > timestamp(thisyear, thismonth, day, Hour, Minute)) ? s3:na, title="S3", style=7, color=s3col)
+//plot(r4)
+//plot(s4)
+
+
+plotshape(showP and showL?pivot:na, title="Pivot Label", text="P", style=shape.labelup, show_last=1, location=location.absolute, textcolor=white, color=orange, transp=10, offset=1, size=size.tiny)
+plotshape(showR and showL?r1:na, title="R1 Label", text="R1", style=shape.labelup, show_last=1, location=location.absolute, textcolor=white, color=orange, transp=10, offset=1, size=size.tiny)
+plotshape(showS and showL?s1:na, title="S1 Label", text="S1", style=shape.labelup, show_last=1, location=location.absolute, textcolor=white, color=orange, transp=10, offset=1, size=size.tiny)
+plotshape(showR and showL?r2:na, title="R2 Label", text="R2", style=shape.labelup, show_last=1, location=location.absolute, textcolor=white, color=orange, transp=10, offset=1, size=size.tiny)
+plotshape(showS and showL?s2:na, title="S2 Label", text="S2", style=shape.labelup, show_last=1, location=location.absolute, textcolor=white, color=orange, transp=10, offset=1, size=size.tiny)
+plotshape(showR and showL?r3:na, title="R3 Label", text="R3", style=shape.labelup, show_last=1, location=location.absolute, textcolor=white, color=orange, transp=10, offset=1, size=size.tiny)
+plotshape(showS and showL?s3:na, title="S3 Label", text="S3", style=shape.labelup, show_last=1, location=location.absolute, textcolor=white, color=orange, transp=10, offset=1, size=size.tiny)
+
+
+//bar colors
+////overp = barcol and close > pivot and close < r1 ? #0f8cb0 : barcol and close >= r1 and close < r2 ? yellow : barcol and close >= r2 ? lime : barcol and close >= r3 ? silver : na
+//over1 = barcol and close >= r1 and close < r2 ? #16c8fc : na
+//over2 = barcol and close >= r2 and close < r3 ? #73defd : na
+//over3 = barcol and close >= r3 ? #b9eefe : na
+////underp = barcol and close < pivot and close > s1 ? red : barcol and close <= s1 and close > s2 ? gray : barcol and close <= s2 ? #fd8ae3 : barcol and close <= s3 ? #c8fc16 : na
+//under1 = barcol and close <= s1 and close > r2 ? #fc16c8 : na
+//under2 = barcol and close <= s2 and close > r3 ? #fd8ae3 : na
+//under3 = barcol and close <= s3 ? #feb9ee : na
+////barcolor(overp)
+//barcolor(over1)
+//barcolor(over2)
+//barcolor(over3)
+////barcolor(underp)
+//barcolor(under1)
+//barcolor(under2)
+//barcolor(under3)
+
+//x=n%10   // n is the bars counter of the system
+//r=x==7?na:x   // if the value=7 then it not paints
+//plot(r,style=columns)
